@@ -10,7 +10,7 @@ const ProductSchema = new Schema(
 			required: true,
 			min: 0.01,
 		},
-		image: { type: string, required: true },
+		image: { type: String, required: true },
 		description: { type: String, required: true },
 	},
 	{
