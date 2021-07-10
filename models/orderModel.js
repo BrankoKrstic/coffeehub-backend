@@ -7,6 +7,7 @@ const OrderSchema = new Schema(
 		items: [
 			{
 				product: {
+					name: { type: String, required: true },
 					categories: [String],
 					_id: { type: String, required: true },
 					price: {
