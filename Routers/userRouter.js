@@ -26,7 +26,7 @@ userRouter.post(
 			if (match) {
 				return res.json({
 					_id: user._id,
-					name: user.name,
+					username: user.username,
 					email: user.email,
 					isAdmin: user.isAdmin,
 					token: generateToken(user),
