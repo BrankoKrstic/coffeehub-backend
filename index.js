@@ -7,6 +7,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const userRouter = require("./Routers/userRouter");
 const productRouter = require("./Routers/productRouter");
+const orderRouter = require("./Routers/orderRouter");
+const bodyParser = require("body-parser");
 
 const app = express();
 mongoose
@@ -26,10 +28,14 @@ const corsConfig = {
 	methods: "GET, POST",
 };
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.use(cors(corsConfig));
 
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
+app.use("/api/orders", orderRouter);
 
 app.listen(PORT, () => {
 	console.log(`Listening on port ${PORT}`);
