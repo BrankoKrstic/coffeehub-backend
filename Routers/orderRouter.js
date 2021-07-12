@@ -36,6 +36,20 @@ orderRouter.get(
 	})
 );
 
+orderRouter.put(
+	"/:id",
+	wrapAsync(async (req, res) => {
+		const order = await Order.findById(req.params.id);
+		if (order) {
+			order.complete = !order.complete;
+			await order.save();
+			res.json({ order });
+		} else {
+			res.status(404).send({ message: "Order not found" });
+		}
+	})
+);
+
 orderRouter.post(
 	"/payment",
 	wrapAsync(async (req, res) => {

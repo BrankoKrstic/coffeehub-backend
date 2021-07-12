@@ -25,11 +25,11 @@ const PORT = process.env.PORT;
 const corsConfig = {
 	origin: process.env.ORIGIN,
 	optionsSuccessStatus: 200,
-	methods: "GET, POST",
+	methods: "GET, POST, PUT",
 };
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use(cors(corsConfig));
 
