@@ -2,6 +2,7 @@ const express = require("express");
 const Product = require("../models/productModel");
 const wrapAsync = require("../utilities/wrapAsync");
 const seedData = require("../seedData/data");
+const jwt = require("jsonwebtoken");
 
 const productRouter = express.Router();
 
@@ -25,11 +26,20 @@ productRouter.get(
 	})
 );
 
-productRouter.get(
-	"/seed",
+productRouter.post(
+	"/",
 	wrapAsync(async (req, res) => {
-		await Product.deleteMany({});
-		const createdProducts = await Product.insertMany(seedData.products);
+		const { token } = req.body;
+		const product = new Product(req.body.product);
+		const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+		if (decoded.isAdmin) {
+			await product.save();
+			if (product._id) {
+				res.json({ message: "success" });
+			} else {
+				res.status(401).send({ message: "Error saving data" });
+			}
+		}
 	})
 );
 
