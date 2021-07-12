@@ -35,6 +35,7 @@ const OrderSchema = new Schema(
 			token: { type: String, required: true },
 			paidAt: { type: Number },
 		},
+		complete: { type: Boolean, default: false },
 	},
 	{
 		timestamps: true,
