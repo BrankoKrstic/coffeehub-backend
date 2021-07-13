@@ -1,7 +1,6 @@
 const express = require("express");
 const Product = require("../models/productModel");
 const wrapAsync = require("../utilities/wrapAsync");
-const seedData = require("../seedData/data");
 const jwt = require("jsonwebtoken");
 
 const productRouter = express.Router();

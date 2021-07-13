@@ -2,17 +2,8 @@ const express = require("express");
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const wrapAsync = require("../utilities/wrapAsync");
-const seedData = require("../seedData/data");
 const generateToken = require("../utilities/generateToken");
 const userRouter = express.Router();
-
-userRouter.get(
-	"/seed",
-	wrapAsync(async (req, res) => {
-		await User.remove({});
-		const createdUsers = await User.insertMany(seedData.users);
-	})
-);
 
 userRouter.post(
 	"/signin",
